@@ -134,21 +134,119 @@
 
 
 
+//using System.Text.Json;
+
+//using var client = new HttpClient();
+
+//var taskList = client.GetStringAsync("https://pokeapi.co/api/v2/pokemon");
+
+
+//var tastkUrl = taskList.ContinueWith(t =>
+//{
+//    var result = t.Result;
+//Console.WriteLine(result);
+
+//var doc = JsonDocument.Parse(result);
+
+//JsonElement root = doc.RootElement;
+//JsonElement results = root.GetProperty("results");
+//JsonElement firstResult = results[0];
+
+// Console.WriteLine($"Name: {firstResult.GetProperty("name")}");
+//Console.WriteLine($"Url: {firstResult.GetProperty("url").ToString()}");
+//return firstResult.GetProperty("url").ToString();
+
+//root.GetProperty("results");
+//});
+
+//var taskJson = tastkUrl.ContinueWith(t =>
+//{
+//    var result = t.Result;
+
+//    return client.GetStringAsync(result);
+//}).Unwrap();
+
+//taskJson.ContinueWith(t =>
+//{
+
+//    var result = t.Result;
+//    var doc = JsonDocument.Parse(result);
+//    JsonElement root = doc.RootElement;
+//    JsonElement results = root.GetProperty("name");
+
+//    Console.WriteLine($"Name: {root.GetProperty("name").ToString()}");
+//Console.WriteLine($"Url: {firstResult.GetProperty("url").ToString()}");
+//});
+
+
+
+
+
+//var tasks = new[]
+//{
+//    Task.Run(() =>
+//    {
+//        throw new InvalidOperationException("Invalid operation.");
+//    }),
+//    Task.Run(() =>
+//    {
+//        throw new ArgumentNullException("Argument null.");
+//    }),
+//    Task.Run(() =>
+//    {
+//        throw new Exception("General Exception.");
+//    })
+
+//};
+
+//Task.WhenAll(tasks).ContinueWith(t =>
+//{
+//    if (t.IsFaulted && t.Exception != null)
+//    {
+//        foreach (var ex in t.Exception.InnerExceptions)
+//        {
+//            Console.WriteLine(ex.Message);
+//        }
+//    }
+//});
+
+//var t = Task.WhenAll(tasks);
+//t.Wait();
+
+
+//###################################################################################
+
 using System.Text.Json;
 
-using var client = new HttpClient();
-
-var task = client.GetStringAsync("https://google.com");
-task.ContinueWith(t =>
-{
-    var result = t.Result;
-    //Console.WriteLine(result);
-
-    var doc = JsonDocument.Parse(result);
-    JsonElement root = doc.RootElement;
-    //root.GetProperty("results");
-});
-
-
+OutputFirst();
 
 Console.ReadLine();
+
+
+
+
+
+async void OutputFirst()
+{
+
+
+    using var client = new HttpClient();
+
+    var taskList = client.GetStringAsync("https://pokeapi.co/api/v2/pokemon");
+
+
+    var response = await taskList;
+
+        var doc = JsonDocument.Parse(response);
+
+        JsonElement root = doc.RootElement;
+        JsonElement results = root.GetProperty("results");
+        JsonElement firstResult = results[0];
+
+        Console.WriteLine($"Name: {firstResult.GetProperty("name")}");
+       
+   
+}
+
+
+//Console.ReadLine();
